@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <style>@import url('https://fonts.googleapis.com/css?family=Philosopher');</style>
+
+    <link rel="icon" type="image/png" href="https://cdn.icon-icons.com/icons2/1261/PNG/512/1496676725-rounded-high-ultra-colour02-maps_84627.png"/>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <title>Mapa Interativo</title>
+  </head>
+  <body>
+    <div class="row justify-content-center">
+      <div  class="col-md" id = "map"></div>
+      <form class="formulario" action="">
+        <div class="col-md justify-content-center">
+          <div class="row justify-content-center">
+            <input type = "checkbox" name  "checkbox" id = "micheckbox" onclick="myFunction()">
+            <label for="micheckbox" id ="micheckbox">Safety</label>
+          </div>
+          <div class="row justify-content-center">
+            <input type="checkbox" name "checkbox2" id="micheckbox2" onclick="myFunction1()" >
+            <label for="micheckbox2" id ="micheckbox2" >Distance</label>
+          </div>
+          <div class="row justify-content-center">
+            <input type="checkbox" name  "checkbox3" id="micheckbox3" onclick="myFunction2()" >
+            <label for="micheckbox3" id ="micheckbox3">Affordability</label>
+          </div>
+          <div class="row justify-content-center">
+            <input type="checkbox" name  "checkbox4" id="micheckbox4" onclick="myFunction3()" >
+            <label for="micheckbox4" id ="micheckbox4">Museums, Galery</label>
+          </div>
+          <div class="row justify-content-center">
+            <input type="checkbox" name  "checkbox7" id="micheckbox7" onclick="myFunction6()" >
+            <label   for="micheckbox7" id ="micheckbox7">Get Top</label>
+          </div>
+          <div class="row justify-content-center">
+            <input type="checkbox" name  "checkbox5" id="micheckbox5" onclick="myFunction4()" >
+            <label for="micheckbox5" id = "micheckbox5">Download</label>
+          </div>
+          <div class="row justify-content-center">
+            <input type="checkbox" name  "checkbox6" id="micheckbox6" onclick="myFunction5()"  >
+            <label for="micheckbox6" id ="micheckbox6">Clear</label>
+          </div>
+          <div class="row justify-content-center">
+            <img src="https://i.pinimg.com/originals/dd/bb/ed/ddbbed13fd7874e79a75e931f34d7253.jpg" >
+          </div>
+          <div class="center">
+      		    <div class="progress">
+      		        <progress id="html5" max="100" value="100"></progress>
+      			         <span></span>
+      		    </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="row justify-content-center"  >
+        <div class="col-md-auto">
+          <div class="D3">
+            <form id = "grafica">
+              <label id = "d3"><input type="radio" name="mode" value="grouped"> Grouped</label>
+              <label id = "d3"><input type="radio" name="mode" value="stacked" checked> Stacked</label>
+            </form>
+            <svg width="900" height="500"></svg>
+          </div>
+        </div>
+        <div class="col-md-auto" id="1">
+          <div class="row justify-content-center">
+            <div class="lazybars-y" id = "scroll" >
+              <table id = "Mytable">
+                <tr>
+                  <th colspan="3">Best Boroughs Affordability</th>
+                </tr>
+                <tr>
+                  <th id = "front">Boroughs</th>
+                  <th id = "front">Name State</th>
+                  <th id = "front">Numbers</th>
+                </tr>
+                <tbody id="tBody">
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col-md-auto" id="2">
+              <div id = "scroll" >
+                <table id = "Mytable1">
+                  <tr>
+                    <th colspan="3">Best Boroughs Distance</th>
+                  </tr>
+                  <tr>
+                    <th id = "front">Boroughs</th>
+                    <th id = "front">Name State</th>
+                    <th id = "front">Distance (km)</th>
+                  </tr>
+                  <tbody id="tBody2">
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col-md-auto" id="3">
+              <div id = "scroll" >
+                <table id = "Mytable2">
+                  <tr>
+                    <th colspan="3">Best Boroughs Safety</th>
+                  </tr>
+                  <tr >
+                    <th id = "front">Boroughs</th>
+                    <th id = "front">Name State</th>
+                    <th id = "front">Numbers</th>
+                  </tr>
+                  <tbody id="tBody3">
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col-md-auto" id="4">
+              <div id = "scroll" >
+                <table id = "Mytable3">
+                  <tr>
+                    <th colspan="2">Best Boroughs Top 3</th>
+                  </tr>
+                  <tr >
+                    <th id = "front">Boroughs</th>
+                    <th id = "front">Name State</th>
+                  </tr>
+                  <tbody id="tBody4">
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+	<script src="https://d3js.org/d3.v4.min.js"></script>
+<script type="text/javascript">
+	window.onload = function() {
+		animateprogress("#html5",100);
+	}
+</script>
+<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+   </script>
+   <script src = "https://code.jquery.com/jquery-3.3.1.min.js" integrity = "sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin = "anonymous"> </script>
+   <script src = "js/main.js"></script>
+  <script src="https://www.jqueryscript.net/demo/jQuery-Plugin-To-Convert-HTML-Table-To-CSV-tabletoCSV/jquery.tabletoCSV.js"></script>
+  <script src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyCOmoIUeEXTkqfd24ywf5BbD8wuU06B_Gg&callback=initMap" async defer></script>
+  <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+</body>
+</html>
